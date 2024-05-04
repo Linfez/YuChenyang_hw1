@@ -10,10 +10,35 @@ Matrix create_matrix(int row, int col)
     return m;
 }
 
+/**
+ * @brief 矩阵加法
+ * @param a 矩阵a
+ * @param b 矩阵b
+ * @return a + b, 如果a和b的行数或列数不相等，会给出错误提示"Error: Matrix a and b must have the same rows and cols.\n"并返回一个空矩阵
+ */
+
 Matrix add_matrix(Matrix a, Matrix b)
 {
-    // ToDo
-    return create_matrix(0, 0);
+    if (a.cols != b.cols || a.rows != b.rows)
+    {
+        printf("Error: Matrix a and b must have the same rows and cols.\n");
+        return create_matrix(0, 0);
+    }
+    else
+    {
+        int rows, cols;
+        rows = a.rows;
+        cols = a.cols;
+        Matrix c = create_matrix(rows, cols);
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                c.data[i][j] = a.data[i][j] + b.data[i][j];
+            }
+        }
+        return c;
+    }
 }
 
 Matrix sub_matrix(Matrix a, Matrix b)

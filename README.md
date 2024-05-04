@@ -63,3 +63,15 @@ Error: Matrix a and b must have the same rows and cols.
 
 ## 截止日期｜Deadline
 待定
+
+
+
+## 实现思路
+
+### ver.1   **初尝试**   
+
+编写矩阵加法函数，使用cmake编译成功运行：
+
+![](https://yu-1325507596.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-05-04%20212531.png)
+
+尝试提交：
