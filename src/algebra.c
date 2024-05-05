@@ -183,6 +183,11 @@ double det_matrix(Matrix a)
             double det = (a.data[0][0] * a.data[1][1] - a.data[0][1] * a.data[1][0]);
             return det;
         }
+        else if (a.cols == 3)
+        {
+            double det = a.data[0][0] * a.data[1][1] * a.data[2][2] + a.data[0][1] * a.data[1][2] * a.data[2][0] + a.data[1][0] * a.data[2][1] * a.data[0][2] - a.data[0][2] * a.data[1][1] * a.data[2][0] - a.data[0][1] * a.data[1][0] * a.data[2][2] - a.data[1][2] * a.data[2][1] * a.data[0][0];
+            return det;
+        }
         else
         {
             double det = 0;
@@ -193,7 +198,10 @@ double det_matrix(Matrix a)
                 /*print_matrix(minor);
                 printf("\n");
                 检测minor函数*/
-                det += power(-1, i + j + 2) * a.data[i][j] * det_matrix(minor);
+                if ((i + j) % 2 == 0)
+                    det += a.data[i][j] * det_matrix(minor);
+                else
+                    det += (-1) * a.data[i][j] * det_matrix(minor);
                 // printf("%.2f\n", det);
             }
             return det;
