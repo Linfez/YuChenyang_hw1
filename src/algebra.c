@@ -76,7 +76,7 @@ Matrix mul_matrix(Matrix a, Matrix b)
 {
     if (a.cols != b.rows)
     {
-        printf("Error: Matrix a and b must have the same rows and cols.\n");
+        printf("Error: The number of cols of matrix a must be equal to the number of rows of matrix b.\n");
         return create_matrix(0, 0);
     }
     else
@@ -89,6 +89,7 @@ Matrix mul_matrix(Matrix a, Matrix b)
         {
             for (int j = 0; j < cols; j++)
             {
+                c.data[i][j] = 0;
                 for (int k = 0; k < a.cols; k++)
                 {
                     c.data[i][j] += a.data[i][k] * b.data[k][j];

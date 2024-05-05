@@ -82,3 +82,7 @@ Error: Matrix a and b must have the same rows and cols.
 
 发送url时出现小问题：直接提交复制的网址失败，后改为提交remote链接的远程仓库网址成功。
 
+### ver.2 实现加减乘法以及转置运算
+**mul函数测试未通过**：错误时输出不正确
+
+### ver.3 修复了乘法运算的bug
