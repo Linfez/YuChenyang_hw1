@@ -132,10 +132,73 @@ Matrix transpose_matrix(Matrix a)
     return c;
 }
 
+double power(double num, int i)
+{
+    if (i == 1)
+        return num;
+    else if (i == 0)
+        return 1;
+    else
+    {
+        return num * pow(num, i - 1);
+    }
+}
+
+Matrix minor_matrix(Matrix a, int rows, int cols)
+{
+    Matrix minor = create_matrix(a.rows - 1, a.cols - 1);
+    int mrows = 0;
+    for (int i = 0; i < a.rows; i++)
+    {
+        if (i == rows)
+            continue;
+        int mcols = 0; // 初始化mcols变量
+        for (int j = 0; j < a.cols; j++)
+        {
+            if (j == cols)
+                continue;
+            minor.data[mrows][mcols] = a.data[i][j];
+            mcols++;
+        }
+        mrows++; // 更新mrows变量
+    }
+    return minor;
+}
+
 double det_matrix(Matrix a)
 {
-    // ToDo
-    return 0;
+    if (a.cols != a.rows)
+    {
+        printf("Error: The matrix must be a square matrix.\n");
+        return 0;
+    }
+    else
+    {
+        if (a.cols == 1)
+        {
+            return a.data[0][0];
+        }
+        else if (a.cols == 2)
+        {
+            double det = (a.data[0][0] * a.data[1][1] - a.data[0][1] * a.data[1][0]);
+            return det;
+        }
+        else
+        {
+            double det = 0;
+            int j = 0;
+            for (int i = 0; i < a.cols; i++)
+            {
+                Matrix minor = minor_matrix(a, i, j);
+                /*print_matrix(minor);
+                printf("\n");
+                检测minor函数*/
+                det += power(-1, i + j + 2) * a.data[i][j] * det_matrix(minor);
+                // printf("%.2f\n", det);
+            }
+            return det;
+        }
+    }
 }
 
 Matrix inv_matrix(Matrix a)
@@ -152,8 +215,20 @@ int rank_matrix(Matrix a)
 
 double trace_matrix(Matrix a)
 {
-    // ToDo
-    return 0;
+    if (a.cols != a.rows)
+    {
+        printf("Error: The matrix must be a square matrix.\n");
+        return 0;
+    }
+    else
+    {
+        double tr = 0;
+        for (int i = 0; i < a.rows; i++)
+        {
+            tr += a.data[i][i];
+        }
+        return tr;
+    }
 }
 
 void print_matrix(Matrix a)

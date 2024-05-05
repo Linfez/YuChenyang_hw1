@@ -86,3 +86,8 @@ Error: Matrix a and b must have the same rows and cols.
 **mul函数测试未通过**：错误时输出不正确
 
 ### ver.3 修复了乘法运算的bug
+
+### ver.4 实现了求行列式的功能
+顺便写了求高次方的函数power与求余子式的函数minor_matrix
+
+GPT，吾师也（

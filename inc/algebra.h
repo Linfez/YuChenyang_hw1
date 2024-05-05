@@ -63,6 +63,12 @@ Matrix transpose_matrix(Matrix a);
 */
 double det_matrix(Matrix a);
 
+/*计算高次幂*/
+double power(double num,int i);
+
+/*求矩阵的余子式*/
+Matrix minor_matrix(Matrix a,int rows,int cols);
+
 /**
  * @brief 矩阵的逆
  * @param a 矩阵a
