@@ -75,3 +75,10 @@ Error: Matrix a and b must have the same rows and cols.
 ![](https://yu-1325507596.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-05-04%20212531.png)
 
 尝试提交：
+
+![](https://yu-1325507596.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-05-04%20230057.png)
+
+成功！
+
+发送url时出现小问题：直接提交复制的网址失败，后改为提交remote链接的远程仓库网址成功。
+
