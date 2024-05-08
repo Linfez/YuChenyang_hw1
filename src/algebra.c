@@ -284,42 +284,52 @@ Matrix inv_matrix(Matrix a)
  * @return a的秩
  */
 
-
-int rank_matrix(Matrix a) {
+int rank_matrix(Matrix a)
+{
+    /*
     int n = a.rows; // 行数
     int m = a.cols; // 列数
     int rank = 0;
     int row, col;
-    
+
     // 用于标记哪些列已经有了主元素
-    int *row_has_pivot = (int*)calloc(m, sizeof(int)); 
+    int *row_has_pivot = (int *)calloc(m, sizeof(int));
 
     // 高斯消元法开始
-    for (row = 0, col = 0; row < n && col < m; col++) {
+    for (row = 0, col = 0; row < n && col < m; col++)
+    {
         // 找到绝对值最大的元素
         int maxRow = row;
-        for (int k = row + 1; k < n; k++) {
-            if (fabs(a.data[k][col]) > fabs(a.data[maxRow][col])) {
+        for (int k = row + 1; k < n; k++)
+        {
+            if (fabs(a.data[k][col]) > fabs(a.data[maxRow][col]))
+            {
                 maxRow = k;
             }
         }
         // 如果这一列全部都是零，就继续处理下一列
-        if (fabs(a.data[maxRow][col]) <= 1e-10) {
+        if (fabs(a.data[maxRow][col]) <= 1e-10)
+        {
             continue;
         }
         // 如果行与最大行元素不在同一行，交换
-        if (row != maxRow) {
-            for (int j = 0; j < m; j++) {
+        if (row != maxRow)
+        {
+            for (int j = 0; j < m; j++)
+            {
                 double temp = a.data[row][j];
                 a.data[row][j] = a.data[maxRow][j];
                 a.data[maxRow][j] = temp;
             }
         }
         // 进行行变换，清零当前列的其他位置
-        for (int i = 0; i < n; i++) {
-            if (i != row) {
+        for (int i = 0; i < n; i++)
+        {
+            if (i != row)
+            {
                 double factor = a.data[i][col] / a.data[row][col];
-                for (int j = col; j < m; j++) {
+                for (int j = col; j < m; j++)
+                {
                     a.data[i][j] -= factor * a.data[row][j];
                 }
             }
@@ -329,14 +339,18 @@ int rank_matrix(Matrix a) {
     }
 
     // 根据row_has_pivot数组来统计秩
-    for (int j = 0; j < m; j++) {
-        if (row_has_pivot[j]) {
+    for (int j = 0; j < m; j++)
+    {
+        if (row_has_pivot[j])
+        {
             rank++;
         }
     }
 
     free(row_has_pivot);
     return rank;
+    */
+   return 0;
 }
 
 double trace_matrix(Matrix a)
