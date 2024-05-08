@@ -91,3 +91,8 @@ Error: Matrix a and b must have the same rows and cols.
 顺便写了求高次方的函数power与求余子式的函数minor_matrix
 
 GPT，吾师也（
+
+**鉴定为：拉普拉斯展开效率太低被打回：（**
+
+
+

@@ -165,6 +165,9 @@ Matrix minor_matrix(Matrix a, int rows, int cols)
     return minor;
 }
 
+/*
+拉普拉斯展开求行列式，效率不高
+
 double det_matrix(Matrix a)
 {
     if (a.cols != a.rows)
@@ -195,18 +198,76 @@ double det_matrix(Matrix a)
             for (int i = 0; i < a.cols; i++)
             {
                 Matrix minor = minor_matrix(a, i, j);
+
                 /*print_matrix(minor);
                 printf("\n");
-                检测minor函数*/
+                检测minor函数
+
                 if ((i + j) % 2 == 0)
                     det += a.data[i][j] * det_matrix(minor);
                 else
                     det += (-1) * a.data[i][j] * det_matrix(minor);
+
                 // printf("%.2f\n", det);
             }
             return det;
         }
     }
+}
+*/
+
+// 高斯消元法求解行列式
+double det_matrix(Matrix mat)
+{
+    double det = 1.0;
+    int n = mat.rows;
+    int sign = 1; // 用于追踪行交换，初始为正号
+
+    for (int i = 0; i < n; i++)
+    {
+        // 寻找第i行到第n行中绝对值最大的行
+        int maxRow = i;
+        for (int k = i + 1; k < n; k++)
+        {
+            if (fabs(mat.data[k][i]) > fabs(mat.data[maxRow][i]))
+            {
+                maxRow = k;
+            }
+        }
+        // 如果发现主元为零，则行列式为零
+        if (mat.data[maxRow][i] == 0.0)
+            return 0;
+
+        // 如果最大元不在当前行，交换行，并更改符号
+        if (i != maxRow)
+        {
+            for (int j = 0; j < mat.cols; j++)
+            {
+                double temp = mat.data[i][j];
+                mat.data[i][j] = mat.data[maxRow][j];
+                mat.data[maxRow][j] = temp;
+                sign *= -1; // 改变行列式的符号
+            }
+        }
+
+        for (int k = i + 1; k < n; k++)
+        {
+            double factor = mat.data[k][i] / mat.data[i][i];
+            for (int j = i + 1; j < n; j++)
+            {
+                // 高斯消元操作
+                mat.data[k][j] -= factor * mat.data[i][j];
+            }
+        }
+    }
+
+    // 行列式是对角线元素的乘积
+    for (int i = 0; i < n; i++)
+    {
+        det *= mat.data[i][i];
+    }
+    det = det * sign; // 考虑交换行引起的符号变化
+    return det;
 }
 
 Matrix inv_matrix(Matrix a)
@@ -215,10 +276,65 @@ Matrix inv_matrix(Matrix a)
     return create_matrix(0, 0);
 }
 
-int rank_matrix(Matrix a)
-{
-    // ToDo
-    return 0;
+/**
+ * @brief 矩阵的秩
+ * @param a 矩阵a
+ * @return a的秩
+ */
+
+
+int rank_matrix(Matrix a) {
+    int n = a.rows; // 行数
+    int m = a.cols; // 列数
+    int rank = 0;
+    int row, col;
+    
+    // 用于标记哪些列已经有了主元素
+    int *row_has_pivot = (int*)calloc(m, sizeof(int)); 
+
+    // 高斯消元法开始
+    for (row = 0, col = 0; row < n && col < m; col++) {
+        // 找到绝对值最大的元素
+        int maxRow = row;
+        for (int k = row + 1; k < n; k++) {
+            if (fabs(a.data[k][col]) > fabs(a.data[maxRow][col])) {
+                maxRow = k;
+            }
+        }
+        // 如果这一列全部都是零，就继续处理下一列
+        if (fabs(a.data[maxRow][col]) <= 1e-10) {
+            continue;
+        }
+        // 如果行与最大行元素不在同一行，交换
+        if (row != maxRow) {
+            for (int j = 0; j < m; j++) {
+                double temp = a.data[row][j];
+                a.data[row][j] = a.data[maxRow][j];
+                a.data[maxRow][j] = temp;
+            }
+        }
+        // 进行行变换，清零当前列的其他位置
+        for (int i = 0; i < n; i++) {
+            if (i != row) {
+                double factor = a.data[i][col] / a.data[row][col];
+                for (int j = col; j < m; j++) {
+                    a.data[i][j] -= factor * a.data[row][j];
+                }
+            }
+        }
+        row_has_pivot[col] = 1; // 这一列已经有主元素了
+        row++;
+    }
+
+    // 根据row_has_pivot数组来统计秩
+    for (int j = 0; j < m; j++) {
+        if (row_has_pivot[j]) {
+            rank++;
+        }
+    }
+
+    free(row_has_pivot);
+    return rank;
 }
 
 double trace_matrix(Matrix a)
