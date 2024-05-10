@@ -56,18 +56,15 @@ Matrix scale_matrix(Matrix a, double k);
 */
 Matrix transpose_matrix(Matrix a);
 
+/*求矩阵余子式*/
+Matrix minor_matrix(Matrix a, int rows, int cols);
+
 /**
  * @brief 矩阵的行列式
  * @param a 矩阵a
  * @return a的行列式, 如果a不是方阵，会给出错误提示"Error: The matrix must be a square matrix.\n"并返回0
 */
 double det_matrix(Matrix a);
-
-/*计算高次幂*/
-double power(double num,int i);
-
-/*求矩阵的余子式*/
-Matrix minor_matrix(Matrix a,int rows,int cols);
 
 /**
  * @brief 矩阵的逆

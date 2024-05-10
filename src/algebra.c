@@ -121,7 +121,7 @@ Matrix transpose_matrix(Matrix a)
     int rows, cols;
     rows = a.rows;
     cols = a.cols;
-    Matrix c = create_matrix(rows, cols);
+    Matrix c = create_matrix(cols, rows);
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -130,18 +130,6 @@ Matrix transpose_matrix(Matrix a)
         }
     }
     return c;
-}
-
-double power(double num, int i)
-{
-    if (i == 1)
-        return num;
-    else if (i == 0)
-        return 1;
-    else
-    {
-        return num * pow(num, i - 1);
-    }
 }
 
 Matrix minor_matrix(Matrix a, int rows, int cols)
