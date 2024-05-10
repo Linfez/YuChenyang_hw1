@@ -153,8 +153,7 @@ Matrix minor_matrix(Matrix a, int rows, int cols)
     return minor;
 }
 
-
-//拉普拉斯展开求行列式，效率不高
+// 拉普拉斯展开求行列式，效率不高
 
 double det_matrix(Matrix a)
 {
@@ -203,8 +202,7 @@ double det_matrix(Matrix a)
     }
 }
 
-
-// 高斯消元法求解行列式
+// 高斯消元法求解行列式,我找不出bug在哪了TT
 /*
 double det_matrix(Matrix mat)
 {
@@ -269,9 +267,49 @@ double det_matrix(Matrix mat)
     return 0;
 }
 */
+
 Matrix inv_matrix(Matrix a)
 {
-    // ToDo
+    if (a.rows != a.cols)
+    {
+        printf("Error: The matrix must be a square matrix.\n");
+        return create_matrix(0, 0);
+    }
+    else if (rank_matrix(a) != a.rows)
+    {
+        printf("Error: The matrix is singular.\n");
+        return create_matrix(0, 0);
+    }
+    else
+    {
+        Matrix inv = create_matrix(a.rows, a.cols);
+        for (int i = 0; i < a.rows; i++)
+            for (int j = 0; j < a.cols; j++)
+                inv.data[i][j] = (i == j) ? 1.0 : 0.0; // 构造单位矩阵
+
+        for (int i = 0; i < a.rows; i++)
+        {
+            double temp = a.data[i][i];
+            for (int j = 0; j < a.cols; j++)
+            {
+                a.data[i][j] /= temp;
+                inv.data[i][j] /= temp; // 使对角线元素都变为1
+            }
+            for (int j = 0; j < a.rows; j++)
+            {
+                if (j != i)
+                {
+                    temp = a.data[j][i];
+                    for (int k = 0; k < a.cols; k++)
+                    {
+                        a.data[j][k] -= a.data[i][k] * temp;
+                        inv.data[j][k] -= inv.data[i][k] * temp;
+                    }
+                }
+            }
+        }
+        return inv;
+    }
     return create_matrix(0, 0);
 }
 
