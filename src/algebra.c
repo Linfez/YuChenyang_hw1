@@ -126,7 +126,7 @@ Matrix transpose_matrix(Matrix a)
     {
         for (int j = 0; j < cols; j++)
         {
-            c.data[i][j] = a.data[j][i];
+            c.data[j][i] = a.data[i][j];
         }
     }
     return c;
@@ -358,13 +358,14 @@ double trace_matrix(Matrix a)
     }
     else
     {
-        double tr = 0;
+        double tr = 0.0;
         for (int i = 0; i < a.rows; i++)
         {
             tr += a.data[i][i];
         }
         return tr;
     }
+    return 0;
 }
 
 void print_matrix(Matrix a)
