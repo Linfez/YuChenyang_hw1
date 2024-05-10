@@ -153,8 +153,8 @@ Matrix minor_matrix(Matrix a, int rows, int cols)
     return minor;
 }
 
-/*
-拉普拉斯展开求行列式，效率不高
+
+//拉普拉斯展开求行列式，效率不高
 
 double det_matrix(Matrix a)
 {
@@ -189,7 +189,7 @@ double det_matrix(Matrix a)
 
                 /*print_matrix(minor);
                 printf("\n");
-                检测minor函数
+                检测minor函数*/
 
                 if ((i + j) % 2 == 0)
                     det += a.data[i][j] * det_matrix(minor);
@@ -202,9 +202,10 @@ double det_matrix(Matrix a)
         }
     }
 }
-*/
+
 
 // 高斯消元法求解行列式
+/*
 double det_matrix(Matrix mat)
 {
     if (mat.cols != mat.rows || mat.cols == 0 || mat.rows == 0)
@@ -267,7 +268,7 @@ double det_matrix(Matrix mat)
     }
     return 0;
 }
-
+*/
 Matrix inv_matrix(Matrix a)
 {
     // ToDo
