@@ -264,8 +264,8 @@ double det_matrix(Matrix mat)
         }
         det = det * sign; // 考虑交换行引起的符号变化
         return det;
-        return 0;
     }
+    return 0;
 }
 
 Matrix inv_matrix(Matrix a)
@@ -282,7 +282,6 @@ Matrix inv_matrix(Matrix a)
 
 int rank_matrix(Matrix a)
 {
-    /*
     int n = a.rows; // 行数
     int m = a.cols; // 列数
     int rank = 0;
@@ -345,7 +344,6 @@ int rank_matrix(Matrix a)
 
     free(row_has_pivot);
     return rank;
-    */
     return 0;
 }
 
