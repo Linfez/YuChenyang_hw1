@@ -207,58 +207,65 @@ double det_matrix(Matrix a)
 // 高斯消元法求解行列式
 double det_matrix(Matrix mat)
 {
-
-    double det = 1.0;
-    int n = mat.rows;
-    int sign = 1; // 用于追踪行交换，初始为正号
-
-    for (int i = 0; i < n; i++)
+    if (mat.cols != mat.rows || mat.cols == 0 || mat.rows == 0)
     {
-        // 寻找第i行到第n行中绝对值最大的行
-        int maxRow = i;
-        for (int k = i + 1; k < n; k++)
-        {
-            if (fabs(mat.data[k][i]) > fabs(mat.data[maxRow][i]))
-            {
-                maxRow = k;
-            }
-        }
-        // 如果发现主元为零，则行列式为零
-        if (mat.data[maxRow][i] == 0.0)
-            return 0;
-
-        // 如果最大元不在当前行，交换行，并更改符号
-        if (i != maxRow)
-        {
-            for (int j = 0; j < mat.cols; j++)
-            {
-                double temp = mat.data[i][j];
-                mat.data[i][j] = mat.data[maxRow][j];
-                mat.data[maxRow][j] = temp;
-            }
-            sign *= -1; // 改变行列式的符号
-        }
-
-        for (int k = i + 1; k < n; k++)
-        {
-            double factor = mat.data[k][i] / mat.data[i][i];
-            for (int j = i + 1; j < n; j++)
-            {
-                // 高斯消元操作
-                mat.data[k][j] -= factor * mat.data[i][j];
-            }
-            mat.data[k][i] = 0;
-        }
+        printf("Error: The matrix must be a square matrix.\n");
+        return 0;
     }
-
-    // 行列式是对角线元素的乘积
-    for (int i = 0; i < n; i++)
+    else
     {
-        det *= mat.data[i][i];
+        double det = 1.0;
+        int n = mat.rows;
+        int sign = 1; // 用于追踪行交换，初始为正号
+
+        for (int i = 0; i < n; i++)
+        {
+            // 寻找第i行到第n行中绝对值最大的行
+            int maxRow = i;
+            for (int k = i + 1; k < n; k++)
+            {
+                if (fabs(mat.data[k][i]) > fabs(mat.data[maxRow][i]))
+                {
+                    maxRow = k;
+                }
+            }
+            // 如果发现主元为零，则行列式为零
+            if (mat.data[maxRow][i] == 0.0)
+                return 0;
+
+            // 如果最大元不在当前行，交换行，并更改符号
+            if (i != maxRow)
+            {
+                for (int j = 0; j < mat.cols; j++)
+                {
+                    double temp = mat.data[i][j];
+                    mat.data[i][j] = mat.data[maxRow][j];
+                    mat.data[maxRow][j] = temp;
+                }
+                sign *= -1; // 改变行列式的符号
+            }
+
+            for (int k = i + 1; k < n; k++)
+            {
+                double factor = mat.data[k][i] / mat.data[i][i];
+                for (int j = i + 1; j < n; j++)
+                {
+                    // 高斯消元操作
+                    mat.data[k][j] -= factor * mat.data[i][j];
+                }
+                mat.data[k][i] = 0;
+            }
+        }
+
+        // 行列式是对角线元素的乘积
+        for (int i = 0; i < n; i++)
+        {
+            det *= mat.data[i][i];
+        }
+        det = det * sign; // 考虑交换行引起的符号变化
+        return det;
+        return 0;
     }
-    det = det * sign; // 考虑交换行引起的符号变化
-    return det;
-    return 0;
 }
 
 Matrix inv_matrix(Matrix a)
