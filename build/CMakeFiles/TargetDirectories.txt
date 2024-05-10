@@ -1,3 +1,0 @@
-C:/Users/Ahei/Desktop/Yu/X-Lab/YuChenyang_hw1/build/CMakeFiles/main.dir
-C:/Users/Ahei/Desktop/Yu/X-Lab/YuChenyang_hw1/build/CMakeFiles/edit_cache.dir
-C:/Users/Ahei/Desktop/Yu/X-Lab/YuChenyang_hw1/build/CMakeFiles/rebuild_cache.dir
