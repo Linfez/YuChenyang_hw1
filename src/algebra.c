@@ -207,7 +207,7 @@ double det_matrix(Matrix a)
 // 高斯消元法求解行列式
 double det_matrix(Matrix mat)
 {
-    /*
+
     double det = 1.0;
     int n = mat.rows;
     int sign = 1; // 用于追踪行交换，初始为正号
@@ -235,8 +235,8 @@ double det_matrix(Matrix mat)
                 double temp = mat.data[i][j];
                 mat.data[i][j] = mat.data[maxRow][j];
                 mat.data[maxRow][j] = temp;
-                sign *= -1; // 改变行列式的符号
             }
+            sign *= -1; // 改变行列式的符号
         }
 
         for (int k = i + 1; k < n; k++)
@@ -247,6 +247,7 @@ double det_matrix(Matrix mat)
                 // 高斯消元操作
                 mat.data[k][j] -= factor * mat.data[i][j];
             }
+            mat.data[k][i] = 0;
         }
     }
 
@@ -256,7 +257,7 @@ double det_matrix(Matrix mat)
         det *= mat.data[i][i];
     }
     det = det * sign; // 考虑交换行引起的符号变化
-    return det;*/
+    return det;
     return 0;
 }
 
@@ -338,7 +339,7 @@ int rank_matrix(Matrix a)
     free(row_has_pivot);
     return rank;
     */
-   return 0;
+    return 0;
 }
 
 double trace_matrix(Matrix a)
